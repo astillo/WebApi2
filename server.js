@@ -36,6 +36,14 @@ server.post('/api/posts/:id/comments', (req, res) => {
     if (!req.body.text) {
         res.status(404).json({ errorMessage: "Please provide text for the comment." })
     }
+    data.insertComment(req.body.text).then((result) => {
+        res.status(201).json({ result })
+    })
+        .catch((err) => {
+            res.status(500).json({ error: "There was an error while saving the comment to the database" })
+        })
+
+
 })
 
 
